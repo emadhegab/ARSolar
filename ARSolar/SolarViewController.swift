@@ -12,6 +12,7 @@ class SolarViewController: UIViewController {
 
     @IBOutlet weak var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
+    let sunPosition = SCNVector3(0, 0, -3)
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
@@ -22,25 +23,31 @@ class SolarViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        createSun()
-        createMercury()
-        createVenus()
-        Queue.main.after(0.1) {
+        Queue.background.after(0.1) {
+            self.createSun()
+        }
+        Queue.background.after(0.1) {
+            self.createMercury()
+        }
+        Queue.background.after(0.1) {
+            self.createVenus()
+        }
+        Queue.background.after(0.1) {
             self.createEarth()
         }
-        Queue.main.after(0.1) {
+        Queue.background.after(0.1) {
             self.createMars()
         }
-        Queue.main.after(0.1) {
+        Queue.background.after(0.1) {
             self.createJupitar()
         }
-        Queue.main.after(0.1) {
+        Queue.background.after(0.1) {
             self.createSaturn()
         }
-        Queue.main.after(0.1) {
+        Queue.background.after(0.1) {
             self.createUranus()
         }
-        Queue.main.after(0.1) {
+        Queue.background.after(0.1) {
             self.createNepton()
         }
 
@@ -49,7 +56,7 @@ class SolarViewController: UIViewController {
     func createSun() {
         let sun = SCNNode(geometry: SCNSphere(radius: 0.4))
         sun.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Sun Diffuse")
-        sun.position = SCNVector3(0, 0, -5)
+        sun.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(sun)
         let sunAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 30))
         sun.runAction(sunAction)
@@ -57,7 +64,7 @@ class SolarViewController: UIViewController {
 
     func createMercury() {
         let mercuryParent = SCNNode()
-        mercuryParent.position = SCNVector3(0, 0, -5)
+        mercuryParent.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(mercuryParent)
         let mercury = planet(geometry: SCNSphere(radius: 0.05), diffuse: #imageLiteral(resourceName: "mercury"), specular: nil, emission: nil, normal: nil, position: SCNVector3(0.5, 0, -0.5))
         mercuryParent.addChildNode(mercury)
@@ -70,7 +77,7 @@ class SolarViewController: UIViewController {
     func createVenus() {
 
         let venusParent = SCNNode()
-        venusParent.position = SCNVector3(0, 0, -5)
+        venusParent.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(venusParent)
         let venus = planet(geometry: SCNSphere(radius: 0.1), diffuse: #imageLiteral(resourceName: "venus_surface"), specular: nil, emission: #imageLiteral(resourceName: "venus_Atmospher"), normal: nil, position: SCNVector3(-1.0, 0, -1.0))
         venusParent.addChildNode(venus)
@@ -82,7 +89,7 @@ class SolarViewController: UIViewController {
 
     func createEarth() {
         let earthParent = SCNNode()
-        earthParent.position = SCNVector3(0, 0, -5)
+        earthParent.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(earthParent)
         let earth = planet(geometry: SCNSphere(radius: 0.2), diffuse: #imageLiteral(resourceName: "earth-day") , specular: #imageLiteral(resourceName: "earth-spec"), emission:  #imageLiteral(resourceName: "earth-cloud"), normal: #imageLiteral(resourceName: "earth_normal"), position: SCNVector3(1.6, 0, 1.6))
         earthParent.addChildNode(earth)
@@ -110,7 +117,7 @@ class SolarViewController: UIViewController {
 
     func createMars() {
         let marsParent = SCNNode()
-        marsParent.position = SCNVector3(0, 0, -5)
+        marsParent.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(marsParent)
         let mars = planet(geometry: SCNSphere(radius: 0.19), diffuse: #imageLiteral(resourceName: "mars") , specular: nil, emission: nil, normal: nil, position: SCNVector3(2.3, 0, 2.3))
         marsParent.addChildNode(mars)
@@ -123,7 +130,7 @@ class SolarViewController: UIViewController {
 
     func createJupitar() {
         let jupiterParent = SCNNode()
-        jupiterParent.position = SCNVector3(0, 0, -5)
+        jupiterParent.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(jupiterParent)
         let jupiter = planet(geometry: SCNSphere(radius: 0.3), diffuse: #imageLiteral(resourceName: "jupiter") , specular: nil, emission: nil, normal: nil, position: SCNVector3(3.3, 0, 3.3))
         jupiterParent.addChildNode(jupiter)
@@ -136,7 +143,7 @@ class SolarViewController: UIViewController {
 
     func createSaturn() {
         let saturnParent = SCNNode()
-        saturnParent.position = SCNVector3(0, 0, -5)
+        saturnParent.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(saturnParent)
         let saturn = planet(geometry: SCNSphere(radius: 0.25), diffuse: #imageLiteral(resourceName: "saturn") , specular: nil, emission: nil, normal: nil, position: SCNVector3(-4.3, 0, -4.3))
         saturnParent.addChildNode(saturn)
@@ -158,7 +165,7 @@ class SolarViewController: UIViewController {
 
     func createUranus() {
         let uranusParent = SCNNode()
-        uranusParent.position = SCNVector3(0, 0, -5)
+        uranusParent.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(uranusParent)
         let uranus = planet(geometry: SCNSphere(radius: 0.25), diffuse: #imageLiteral(resourceName: "uranus") , specular: nil, emission: nil, normal: nil, position: SCNVector3(5.3, 0, 5.3))
         uranusParent.addChildNode(uranus)
@@ -172,7 +179,7 @@ class SolarViewController: UIViewController {
 
     func createNepton() {
         let neptunParent = SCNNode()
-        neptunParent.position = SCNVector3(0, 0, -5)
+        neptunParent.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(neptunParent)
         let neptun = planet(geometry: SCNSphere(radius: 0.25), diffuse: #imageLiteral(resourceName: "neptune") , specular: nil, emission: nil, normal: nil, position: SCNVector3(6.5, 0, 6.6))
         neptunParent.addChildNode(neptun)

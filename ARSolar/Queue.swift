@@ -10,7 +10,7 @@ import UIKit
 struct Queue {
 
     static let main = Queue(queue: DispatchQueue.main)
-
+    static let background = Queue(queue: .global(qos: .background))
     let queue: DispatchQueue
     init(queue: DispatchQueue) {
         self.queue = queue
