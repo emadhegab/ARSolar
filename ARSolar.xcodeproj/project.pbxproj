@@ -13,6 +13,7 @@
 		A533FC1F1FB84A8B008A3439 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A533FC1E1FB84A8B008A3439 /* Assets.xcassets */; };
 		A533FC221FB84A8B008A3439 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A533FC201FB84A8B008A3439 /* LaunchScreen.storyboard */; };
 		A533FC2D1FB84A8B008A3439 /* PlanetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533FC2C1FB84A8B008A3439 /* PlanetsTests.swift */; };
+		A54423D51FC1C781000784FB /* Solar.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A54423D41FC1C781000784FB /* Solar.scnassets */; };
 		A5D4FEF31FBA288D00912892 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4FEF21FBA288C00912892 /* Queue.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		A533FC281FB84A8B008A3439 /* ARSolarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARSolarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A533FC2C1FB84A8B008A3439 /* PlanetsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsTests.swift; sourceTree = "<group>"; };
 		A533FC2E1FB84A8B008A3439 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A54423D41FC1C781000784FB /* Solar.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Solar.scnassets; sourceTree = "<group>"; };
 		A5D4FEF21FBA288C00912892 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +84,7 @@
 				A533FC171FB84A8B008A3439 /* AppDelegate.swift */,
 				A533FC191FB84A8B008A3439 /* SolarViewController.swift */,
 				A5D4FEF21FBA288C00912892 /* Queue.swift */,
+				A54423D41FC1C781000784FB /* Solar.scnassets */,
 				A533FC1B1FB84A8B008A3439 /* Main.storyboard */,
 				A533FC1E1FB84A8B008A3439 /* Assets.xcassets */,
 				A533FC201FB84A8B008A3439 /* LaunchScreen.storyboard */,
@@ -184,6 +187,7 @@
 			files = (
 				A533FC221FB84A8B008A3439 /* LaunchScreen.storyboard in Resources */,
 				A533FC1F1FB84A8B008A3439 /* Assets.xcassets in Resources */,
+				A54423D51FC1C781000784FB /* Solar.scnassets in Resources */,
 				A533FC1D1FB84A8B008A3439 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,7 +363,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6XF42ZHPGY;
-				INFOPLIST_FILE = ARSolar/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ARSolar/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thedarkdimension.Solar;
@@ -375,7 +379,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6XF42ZHPGY;
-				INFOPLIST_FILE = ARSolar/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ARSolar/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thedarkdimension.Solar;

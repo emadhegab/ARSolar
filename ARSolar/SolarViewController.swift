@@ -24,6 +24,9 @@ class SolarViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Queue.background.after(0.1) {
+            self.createUniverse()
+        }
+        Queue.background.after(0.1) {
             self.createSun()
         }
         Queue.background.after(0.1) {
@@ -52,7 +55,11 @@ class SolarViewController: UIViewController {
         }
 
     }
-
+    func createUniverse() {
+        guard let universe = SCNScene(named: "Solar.scnassets/universe.scn")?.rootNode.childNode(withName: "universe", recursively: false) else { return  }
+        universe.position = SCNVector3(0, 0, -5)
+        sceneView.scene.rootNode.addChildNode(universe)
+    }
     func createSun() {
         let sun = SCNNode(geometry: SCNSphere(radius: 0.4))
         sun.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Sun Diffuse")
