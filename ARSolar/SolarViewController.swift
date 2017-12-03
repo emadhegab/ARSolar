@@ -29,36 +29,35 @@ class SolarViewController: UIViewController {
         Queue.background.after(0.1) {
             self.createUniverse()
         }
-        Queue.background.after(0.1) {
+        Queue.background.after(1.0) {
             self.createSun()
+             self.addLight()
         }
-        Queue.background.after(0.1) {
+        Queue.background.after(2.0) {
             self.createMercury()
         }
-        Queue.background.after(0.1) {
+        Queue.background.after(3.0) {
             self.createVenus()
         }
-        Queue.background.after(0.1) {
+        Queue.background.after(4.1) {
             self.createEarth()
         }
-        Queue.background.after(0.1) {
+        Queue.background.after(5.1) {
             self.createMars()
         }
-        Queue.background.after(0.1) {
+        Queue.background.after(6.1) {
             self.createJupitar()
         }
-        Queue.background.after(0.1) {
+        Queue.background.after(7.1) {
             self.createSaturn()
         }
-        Queue.background.after(0.1) {
+        Queue.background.after(8.1) {
             self.createUranus()
         }
-        Queue.background.after(0.1) {
+        Queue.background.after(9.1) {
             self.createNepton()
         }
-        Queue.background.after(3) {
-            self.addLight()
-        }
+
 
     }
     func createUniverse() {
