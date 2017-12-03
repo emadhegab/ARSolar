@@ -12,7 +12,10 @@ class SolarViewController: UIViewController {
 
     @IBOutlet weak var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
-    let sunPosition = SCNVector3(0, 0, -3)
+    let sunPosition = SCNVector3(0, -0.1, -3)
+    let lightNode = SCNNode()
+    var sun: SCNNode!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
@@ -53,6 +56,9 @@ class SolarViewController: UIViewController {
         Queue.background.after(0.1) {
             self.createNepton()
         }
+        Queue.background.after(3) {
+            self.addLight()
+        }
 
     }
     func createUniverse() {
@@ -61,12 +67,22 @@ class SolarViewController: UIViewController {
         sceneView.scene.rootNode.addChildNode(universe)
     }
     func createSun() {
-        let sun = SCNNode(geometry: SCNSphere(radius: 0.4))
-        sun.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Sun Diffuse")
+
+        sun = SCNNode(geometry: SCNSphere(radius: 0.4))
+        sun.geometry?.firstMaterial?.diffuse.contents = UIColor.black
+        sun.geometry?.firstMaterial?.multiply.intensity = 0.5
+        sun.geometry?.firstMaterial?.lightingModel = SCNMaterial.LightingModel.constant
+        sun.geometry?.firstMaterial?.multiply.wrapS = .repeat
+        sun.geometry?.firstMaterial?.diffuse.wrapS = .repeat
+        sun.geometry?.firstMaterial?.multiply.wrapT = .repeat
+        sun.geometry?.firstMaterial?.diffuse.wrapT = .repeat
+
         sun.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(sun)
+
         let sunAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 30))
         sun.runAction(sunAction)
+
     }
 
     func createMercury() {
@@ -97,8 +113,10 @@ class SolarViewController: UIViewController {
     func createEarth() {
         let earthParent = SCNNode()
         earthParent.position = sunPosition
+
         self.sceneView.scene.rootNode.addChildNode(earthParent)
-        let earth = planet(geometry: SCNSphere(radius: 0.2), diffuse: #imageLiteral(resourceName: "earth-day") , specular: #imageLiteral(resourceName: "earth-spec"), emission:  #imageLiteral(resourceName: "earth-cloud"), normal: #imageLiteral(resourceName: "earth_normal"), position: SCNVector3(1.6, 0, 1.6))
+        let earth = planet(geometry: SCNSphere(radius: 0.2), diffuse: #imageLiteral(resourceName: "earth-day") , specular: #imageLiteral(resourceName: "earth-specular"), emission:  #imageLiteral(resourceName: "earth_night"), normal: #imageLiteral(resourceName: "earth_normal"), position: SCNVector3(1.6, 0, 1.6))
+
         earthParent.addChildNode(earth)
         let earthParentAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 20))
         let earthAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 10))
@@ -206,11 +224,35 @@ class SolarViewController: UIViewController {
         planet.geometry?.firstMaterial?.specular.contents = specular
         planet.geometry?.firstMaterial?.emission.contents = emission
         planet.geometry?.firstMaterial?.normal.contents = normal
+        planet.geometry?.firstMaterial?.locksAmbientWithDiffuse = true
+        planet.geometry?.firstMaterial?.shininess = 0.1
+        planet.geometry?.firstMaterial?.specular.intensity = 0.5
         planet.position = position
         return planet
     }
 
+    func addLight() {
+        lightNode.light = SCNLight()
+        darkSun()
+        lightNode.light?.type = .omni
+        sun.addChildNode(lightNode)
+        lightNode.light?.attenuationEndDistance = 19
+        lightNode.light?.attenuationStartDistance = 300
 
+        self.lightSun()
+
+    }
+    func darkSun() {
+        lightNode.light?.color = UIColor.black
+        sun.geometry?.firstMaterial?.diffuse.contents = UIColor.black
+        sun.geometry?.firstMaterial?.multiply.contents = UIColor.black
+    }
+
+    func lightSun() {
+        lightNode.light?.color = UIColor.white
+        sun.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Sun Diffuse")
+        sun.geometry?.firstMaterial?.multiply.contents = #imageLiteral(resourceName: "Sun Diffuse")
+    }
 }
 extension Int {
 
