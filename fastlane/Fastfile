@@ -1,0 +1,29 @@
+# More documentation about how to customize your build
+# can be found here:
+# https://docs.fastlane.tools
+fastlane_version "2.68.0"
+# This value helps us track success metrics for Fastfiles
+# we automatically generate. Feel free to remove this line
+# once you get things running smoothly!
+generated_fastfile_id "9296f834-f5dd-4c26-8350-efb52f58d9d3"
+
+default_platform :ios
+
+# Fastfile actions accept additional configuration, but
+# don't worry, fastlane will prompt you for required
+# info which you can add here later
+lane :beta do
+  # increment_build_number
+  # build your iOS app
+  build_app(
+    scheme: "ARSolar",
+    export_method: "app-store",
+    workspace: "ARSolar.xcworkspace",
+            include_bitcode: true
+  )
+
+  pilot {
+    skip_submission:true, distribute_external:false, skip_waiting_for_build_processing:true
+  }
+  say "all upload .. please wait till it got proccessed"
+end

@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  ARSolar
+
+  Created by Mohamed Hegab on 12/8/17.
+  Copyright © 2017 Mohamed Emad Hegab. All rights reserved.
+*/
+"NSCameraUsageDescription" = "نرغب بشدة في إستخدام الكاميرا الخاصة بك لمنحك كامل التجربة مع خاصية الواقع الإفتراضي.. من فضلك اسمح لنا بها!";
+"CFBundleDisplayName" = "مجرتنا الصغيرة";

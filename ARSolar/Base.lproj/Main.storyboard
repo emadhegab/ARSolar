@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,29 +14,108 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SolarViewController" customModule="ARSolar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8N-gD-GiV">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </arscnView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tnt-g3-bAI" customClass="MHButton" customModule="ARSolar" customModuleProvider="target">
+                                <rect key="frame" x="315" y="64" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="HoI-po-nXY">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="40" id="okk-aE-KDu">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                    </constraint>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" backgroundImage="planets"/>
+                                <connections>
+                                    <action selector="togglePlanets:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fw3-ob-c9j"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hk-KA-akV" customClass="MHButton" customModule="ARSolar" customModuleProvider="target">
+                                <rect key="frame" x="315" y="718" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1eR-Jf-UI7">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="40" id="nu2-jm-jJz">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                    </constraint>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="orbits"/>
+                                <connections>
+                                    <action selector="toggleOrbits:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QC2-a6-V7p"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ffc-kH-ovL" customClass="MHButton" customModule="ARSolar" customModuleProvider="target">
+                                <rect key="frame" x="20" y="718" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="0si-VK-pZ2">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="40" id="6oL-hJ-Rlr">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                    </constraint>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="light"/>
+                                <connections>
+                                    <action selector="toggleLight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qcn-xh-DIk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rpd-sd-VfL" customClass="MHButton" customModule="ARSolar" customModuleProvider="target">
+                                <rect key="frame" x="20" y="64" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="6xK-fe-BVo">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="40" id="kj9-ww-gjP">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                    </constraint>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="galaxy"/>
+                                <connections>
+                                    <action selector="toggleGalaxy:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VEW-eK-N6p"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5hk-KA-akV" secondAttribute="trailing" constant="20" id="1kE-zG-3jD"/>
+                            <constraint firstItem="Ffc-kH-ovL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="652-7Q-abF"/>
                             <constraint firstItem="m8N-gD-GiV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="77K-WI-ONb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5hk-KA-akV" secondAttribute="bottom" constant="20" id="7cy-6S-XhP"/>
                             <constraint firstItem="m8N-gD-GiV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="M1d-HI-KjE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ffc-kH-ovL" secondAttribute="bottom" constant="20" id="OFT-UN-HR8"/>
+                            <constraint firstItem="Rpd-sd-VfL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Uql-lr-CS5"/>
                             <constraint firstItem="m8N-gD-GiV" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="m2F-e3-ro1"/>
+                            <constraint firstItem="Tnt-g3-bAI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="nbe-WG-TbP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tnt-g3-bAI" secondAttribute="trailing" constant="20" id="o2R-dH-efZ"/>
+                            <constraint firstItem="Rpd-sd-VfL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="szw-pC-MJB"/>
                             <constraint firstItem="m8N-gD-GiV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="zrW-Ye-NNq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="planetButton" destination="Tnt-g3-bAI" id="v9I-yw-g7O"/>
                         <outlet property="sceneView" destination="m8N-gD-GiV" id="Y9t-LB-h7Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
+            <point key="canvasLocation" x="136.28185907046478" y="132"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="galaxy" width="128" height="128"/>
+        <image name="light" width="128" height="128"/>
+        <image name="orbits" width="48" height="48"/>
+        <image name="planets" width="48" height="48"/>
+    </resources>
 </document>

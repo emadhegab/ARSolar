@@ -8,73 +8,68 @@
 
 import UIKit
 import ARKit
+
 class SolarViewController: UIViewController {
 
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var planetButton: UIButton!
     let configuration = ARWorldTrackingConfiguration()
     let sunPosition = SCNVector3(0, -0.1, -3)
     let lightNode = SCNNode()
     var sun: SCNNode!
+    var universe: SCNNode!
+    var lightToggled: Bool = false
+    var orbitToggled: Bool = false
+    var universeToggled: Bool = false
+    var planetsToggled: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+        createSun()
+
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
-        // Do any additional setup after loading the view, typically from a nib.
+
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        Queue.background.after(0.1) {
-            self.createUniverse()
-        }
-        Queue.background.after(1.0) {
-            self.createSun()
-             self.addLight()
-        }
+    func setupPlanets() {
+        planetButton.isEnabled = false
         Queue.background.after(2.0) {
             self.createMercury()
         }
-        Queue.background.after(3.0) {
+        Queue.background.after(2.0) {
             self.createVenus()
         }
         Queue.background.after(4.1) {
             self.createEarth()
         }
-        Queue.background.after(5.1) {
+        Queue.background.after(4.1) {
             self.createMars()
         }
         Queue.background.after(6.1) {
             self.createJupitar()
         }
-        Queue.background.after(7.1) {
+        Queue.background.after(6.1) {
             self.createSaturn()
         }
-        Queue.background.after(8.1) {
+        Queue.background.after(7.1) {
             self.createUranus()
         }
-        Queue.background.after(9.1) {
+        Queue.main.after(7.1) {
             self.createNepton()
         }
-
-
     }
+
     func createUniverse() {
-        guard let universe = SCNScene(named: "Solar.scnassets/universe.scn")?.rootNode.childNode(withName: "universe", recursively: false) else { return  }
+        universe = (SCNScene(named: "Solar.scnassets/universe.scn")?.rootNode.childNode(withName: "universe", recursively: false))!
         universe.position = SCNVector3(0, 0, -5)
         sceneView.scene.rootNode.addChildNode(universe)
     }
     func createSun() {
 
         sun = SCNNode(geometry: SCNSphere(radius: 0.4))
-        sun.geometry?.firstMaterial?.diffuse.contents = UIColor.black
-        sun.geometry?.firstMaterial?.multiply.intensity = 0.5
-        sun.geometry?.firstMaterial?.lightingModel = SCNMaterial.LightingModel.constant
-        sun.geometry?.firstMaterial?.multiply.wrapS = .repeat
-        sun.geometry?.firstMaterial?.diffuse.wrapS = .repeat
-        sun.geometry?.firstMaterial?.multiply.wrapT = .repeat
-        sun.geometry?.firstMaterial?.diffuse.wrapT = .repeat
+        sun.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Sun Diffuse")
+        sun.geometry?.firstMaterial?.multiply.contents = #imageLiteral(resourceName: "Sun Diffuse")
 
         sun.position = sunPosition
         self.sceneView.scene.rootNode.addChildNode(sun)
@@ -133,8 +128,8 @@ class SolarViewController: UIViewController {
 
         let moon = planet(geometry: SCNSphere(radius: CGFloat(0.2 / 6)), diffuse: #imageLiteral(resourceName: "moon") , specular: nil, emission:  nil, normal: nil, position: SCNVector3(0.3, 0, 0))
         earth.addChildNode(moon)
-        let moonParentAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 4))
-        let moonAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 5))
+        let moonParentAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 2))
+        let moonAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 10))
         moonParent.runAction(moonParentAction)
         moon.runAction(moonAction)
     }
@@ -212,13 +207,13 @@ class SolarViewController: UIViewController {
 
         neptunParent.runAction(neptunParentAction)
         neptun.runAction(neptunAction)
-
+        planetButton.isEnabled = true
     }
 
 
 
-    func planet(geometry: SCNGeometry, diffuse: UIImage, specular: UIImage?, emission: UIImage?, normal: UIImage?, position: SCNVector3) -> SCNNode{
-        let planet = SCNNode(geometry: geometry)
+    func planet(geometry: SCNGeometry, diffuse: UIImage, specular: UIImage?, emission: UIImage?, normal: UIImage?, position: SCNVector3) -> SolarNode{
+        let planet = SolarNode(geometry: geometry)
         planet.geometry?.firstMaterial?.diffuse.contents = diffuse
         planet.geometry?.firstMaterial?.specular.contents = specular
         planet.geometry?.firstMaterial?.emission.contents = emission
@@ -239,23 +234,81 @@ class SolarViewController: UIViewController {
         lightNode.light?.attenuationStartDistance = 300
 
         self.lightSun()
-
     }
+
+    func removeLight() {
+        lightNode.removeFromParentNode()
+        darkSun()
+    }
+
     func darkSun() {
         lightNode.light?.color = UIColor.black
-        sun.geometry?.firstMaterial?.diffuse.contents = UIColor.black
-        sun.geometry?.firstMaterial?.multiply.contents = UIColor.black
+        sun.geometry?.firstMaterial?.lightingModel = SCNMaterial.LightingModel.blinn
     }
 
     func lightSun() {
         lightNode.light?.color = UIColor.white
-        sun.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Sun Diffuse")
-        sun.geometry?.firstMaterial?.multiply.contents = #imageLiteral(resourceName: "Sun Diffuse")
+        sun.geometry?.firstMaterial?.multiply.intensity = 0.5
+        sun.geometry?.firstMaterial?.lightingModel = SCNMaterial.LightingModel.constant
+        sun.geometry?.firstMaterial?.multiply.wrapS = .repeat
+        sun.geometry?.firstMaterial?.diffuse.wrapS = .repeat
+        sun.geometry?.firstMaterial?.multiply.wrapT = .repeat
+        sun.geometry?.firstMaterial?.diffuse.wrapT = .repeat
+    }
+
+    func destroyPlanets() {
+        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
+            if node is SolarNode {
+                node.removeFromParentNode()
+            }
+        }
+    }
+
+    func destroyUniverse() {
+        universe.removeFromParentNode()
+
+    }
+
+    @IBAction func toggleLight(_ sender: UIButton) {
+        if lightToggled {
+            removeLight()
+        } else {
+            addLight()
+        }
+        sender.isSelected = !sender.isSelected
+        lightToggled = !lightToggled
+    }
+    @IBAction func togglePlanets(_ sender: UIButton) {
+        if planetsToggled {
+            destroyPlanets()
+        } else {
+            setupPlanets()
+        }
+        sender.isSelected = !sender.isSelected
+        planetsToggled = !planetsToggled
+
+    }
+
+    @IBAction func toggleOrbits(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        orbitToggled = !orbitToggled
+    }
+    @IBAction func toggleGalaxy(_ sender: UIButton) {
+        if universeToggled {
+            destroyUniverse()
+        } else {
+            createUniverse()
+        }
+        sender.isSelected = !sender.isSelected
+        universeToggled = !universeToggled
     }
 }
+
 extension Int {
 
     var degreesToRadians: Double { return Double(self) * .pi/180}
+
+
 }
 
 

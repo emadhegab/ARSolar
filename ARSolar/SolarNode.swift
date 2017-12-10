@@ -10,12 +10,12 @@ import Foundation
 import ARKit
 
 class SolarNode: SCNNode {
-    override init() {
+    init(geometry: SCNGeometry) {
         super.init()
-        self.geometry?.firstMaterial?.locksAmbientWithDiffuse = true
+        self.geometry = geometry
     }
-
-    required init?(coder aDecoder: NSCoder) {
+    /* Xcode required this */
+    required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

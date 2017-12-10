@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  ARSolar
+
+  Created by Mohamed Hegab on 12/8/17.
+  Copyright © 2017 Mohamed Emad Hegab. All rights reserved.
+*/
+"NSCameraUsageDescription" = "Deine Kamera ist essentiell für deine AR Erfahrung. Bitte erlaubt uns, sie zu benutzen!";
+"CFBundleDisplayName" = "Unsere kleine Galaxie";
